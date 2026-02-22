@@ -27,7 +27,52 @@ The dataset is generated using probabilistic rules and parameterized statistical
   - Tunable effect-size parameters (`DEFAULT_BETA`)  
   - ADL item-level generation logic  
   - MNA item-level generation logic  
-  - CSV export examples  
+  - CSV export workflow  
+
+---
+
+## 📊 Generated Datasets Used in This Study
+
+The following synthetic datasets were generated from the notebook and were used for statistical analysis in this work:
+
+- `data_gen_almost5.csv`  
+  Cleaned synthetic cohort dataset containing:
+  - Demographics  
+  - Comorbidities  
+  - Severity measures (NIHSS)  
+  - Treatment variables  
+  - Complications  
+  - Depression and nutrition variables  
+  - Functional outcomes (ADL discharge and 6-month)  
+
+- `data_with_pt_code_5.csv`  
+  Final analytical dataset including:
+  - All variables in `data_gen_almost5.csv`  
+  - Additional patient-level identifiers (`pt_code`)  
+  - Variables formatted and structured for regression modeling  
+  - Final version used for Modified Poisson regression and subgroup analysis  
+
+---
+
+## 📌 Notes on Versioning
+
+- Both datasets were generated directly from `0_Data_generation_approach.ipynb`.
+- The suffix `_5` reflects the calibrated version used in the final analysis of this project.
+- Any future updates to effect-size parameters (`DEFAULT_BETA`) or simulation logic should regenerate these datasets to maintain reproducibility.
+
+---
+
+## 🔁 Reproducibility
+
+To regenerate the datasets exactly as used in this study:
+
+```python
+df = generate_synthetic_stroke(n=2200, seed=42)
+df.to_csv("data_gen_almost5.csv", index=False)
+
+# If pt_code creation step is included in notebook
+df_with_code.to_csv("data_with_pt_code_5.csv", index=False)
+```
 
 ---
 
